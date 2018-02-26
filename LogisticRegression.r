@@ -97,3 +97,11 @@ plot(roccurve, legacy.axes = TRUE)
 
 auc_test = auc(roccurve_test)
 gini_test = 2*auc - 1
+
+                         
+                         
+# If everything is fine
+# Transform model coefficients into an SQL Code to use it in customer scoring
+# glm_to_sql is a code that me and my colleagues created
+
+sql_code = glm_to_sql(model)

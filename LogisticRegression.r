@@ -73,7 +73,7 @@ summary(model)
 
 # Plot the ROC curve for training set
 library(pROC)
-prob_training=predict(model,training_set,type=c("response"))
+prob_training=predict.glm(model,training_set,type=c("response"))
 roccurve_training <- roc(training_set$TARGET_COLUMN_NAME ~ prob_training)
 plot(roccurve, legacy.axes = TRUE)
 
@@ -86,7 +86,7 @@ gini_training = 2*auc - 1
 
 # Plot the ROC curve for training set
 library(pROC)
-prob_test=predict(model,test_set,type=c("response"))
+prob_test=predict.glm(model,test_set,type=c("response"))
 roccurve_test <- roc(training_set$TARGET_COLUMN_NAME ~ prob_test)
 plot(roccurve, legacy.axes = TRUE)
 

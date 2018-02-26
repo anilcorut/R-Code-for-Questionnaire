@@ -78,7 +78,7 @@ roccurve_training <- roc(training_set$TARGET_COLUMN_NAME ~ prob_training)
 plot(roccurve, legacy.axes = TRUE)
 
 
-# Calculate AUC and gini for training set
+# Calculate AUC and gini coefficient for training set
 auc_training = auc(roccurve_training)
 gini_training = 2*auc - 1
 
@@ -91,7 +91,7 @@ roccurve_test <- roc(training_set$TARGET_COLUMN_NAME ~ prob_test)
 plot(roccurve, legacy.axes = TRUE)
 
 
-# Calculate AUC and gini for training set
+# Calculate AUC and ginicoefficient for training set
 auc_test = auc(roccurve_test)
 gini_test = 2*auc - 1
 

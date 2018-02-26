@@ -27,24 +27,24 @@ model_data <- sqlQuery(channel,
                        ")
 
 
-# If needed: transform nulls which belong categoric data into "0"
+# If needed: transform missing categoric data into "0"
 
 model_data[is.na(model_data[,2]),2] <- 0
 for (i in c()) {
   model_data[,i] <- as.factor(model_data[,i])
 }
 
-# If needed: Write column mean into missing data
+# If needed: transform missing numeric data into column mean
 
 model_data$col1 = ifelse(is.na(model_data$col1),
                          ave(model_data$col1, FUN = function(x) mean(x, na.rm = TRUE)),
                          model_data$col1)
 
 
-# If needed: transform nulls which belong numeric data into "0"
+# If needed: transform missing numeric data into "0"
 # and change column names into ISNULL expressions in order to use it in SQL
-
-
+# I usually run this part when I consider my data and its business meaning
+                         
 for (i in 1:(ncol(model_data)-1)) {
   if(!is.factor(model_data[,i])){
     model_data[is.na(model_data[,i]),i] <- 0
@@ -73,28 +73,25 @@ summary(model)
 
 # Plot the ROC curve for training set
 library(pROC)
-prob_training=predict(model,type=c("response"))
+prob_training=predict(model,training_set,type=c("response"))
 roccurve_training <- roc(training_set$TARGET_COLUMN_NAME ~ prob_training)
 plot(roccurve, legacy.axes = TRUE)
 
 
 # Calculate AUC and gini for training set
-
 auc_training = auc(roccurve_training)
 gini_training = 2*auc - 1
 
 
 
 # Plot the ROC curve for training set
-
 library(pROC)
-prob_test=predict(model,type=c("response"))
+prob_test=predict(model,test_set,type=c("response"))
 roccurve_test <- roc(training_set$TARGET_COLUMN_NAME ~ prob_test)
 plot(roccurve, legacy.axes = TRUE)
 
 
 # Calculate AUC and gini for training set
-
 auc_test = auc(roccurve_test)
 gini_test = 2*auc - 1
 

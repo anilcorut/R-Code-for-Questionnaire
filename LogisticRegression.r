@@ -6,12 +6,9 @@ library(utils)
 library(sqldf)
 
 
-
 # Define connection
 options(scipen=999)
-
 channel <- odbcConnect("schema_name", uid="user_id", pwd="password",believeNRows=FALSE)
-
 
 # Get data
 model_data <- sqlQuery(channel,
@@ -68,7 +65,6 @@ test_set = subset(model_data, split == FALSE)
 model <- glm(TARGET_COLUMN_NAME ~.,family=binomial(link='logit'),data=training_set)
 
 # Check the statistics 
-
 summary(model)
 
 # Plot the ROC curve for training set

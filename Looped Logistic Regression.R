@@ -18,7 +18,7 @@ data <- sqlQuery(channel,
                  .
                  .
                  ...,
-                 TARGET_FLAGLAG
+                 TARGET_FLAG
                  FROM 
                  DATA_TABLE
                  WHERE 
@@ -56,17 +56,14 @@ nrow(train_set[train_set$CC_TARGET_FLAG==1,])/nrow(train_set[train_set$CC_TARGET
 nrow(test_set[test_set$CC_TARGET_FLAG==1,])/nrow(test_set[test_set$CC_TARGET_FLAG==0,])
 
 
-#build model
-#Defined necessary variables-dataframes for outputs
+
+#Define necessary variables-dataframes for outputs
 
 columns <- colnames(train_set)
 GiniTrain <- data.frame(Doubles=double())
 GiniTest <- data.frame(Doubles=double())
 NofCols <- data.frame(Doubles=double())
 SummaryTable <- data.frame(GiniTrain=double(),GiniTest=double(),NofCols=double())
-
-
-
 
 
 

@@ -4,6 +4,7 @@ library(utils)
 library(sqldf)
 library(xgboost)
 library(dplyr)
+library(pROC)
 
 options(scipen=999)
 
@@ -74,3 +75,15 @@ model_xgb <- xgb.cv(data = final_train_data,
 
 
 
+# Predict on test data
+
+predict_test <- predict(model_xgb,final_test_data,type="prob")
+
+# Calculate AUC
+
+roccurve_test <- roc(y_test ~ predict_test)
+
+plot(roccurve_test, legacy.axes = TRUE)
+
+auc_test <- auc(roccurve_test)
+gini_test <- 2*auc_test - 1
